@@ -1,0 +1,16 @@
+[package]
+name = "protocols"
+description = "Collection of various protobuf definitions"
+version = "0.2.0"
+authors = ["Kirill Sumorokov <sumorokov.k@gmail.com>"]
+edition = "2024"
+license = "MIT"
+
+[dependencies]
+prost = "0.13.5"
+prost-types = "0.13.5"
+tonic = "0.13.0"
+tonic-reflection = "0.13.0"
+
+[build-dependencies]
+tonic-build = "0.13.0"

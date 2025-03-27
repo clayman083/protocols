@@ -1,0 +1,16 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+includes:
+  pre-commit: .taskfiles/pre-commit/Taskfile.yml
+
+tasks:
+  default:
+    cmd: task -l
+    silent: true
+
+  test:
+    desc: Run tests
+    cmd: cargo test --locked --release
