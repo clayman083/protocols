@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "master"
+    tags:
+      - "v*"
+  pull_request:
+    branches:
+      - "master"
+
+jobs:
+  format:
+    name: Check with rustfmt formatter
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          components: rustfmt
+
+      - name: Rustfmt Check
+        run: cargo fmt --check
+
+  tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+    needs: [format]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup go-task
+        uses: pnorton5432/setup-task@v1
+        with:
+          task-version: 3.29.1
+
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+
+      - name: Run tests
+        run: task test
